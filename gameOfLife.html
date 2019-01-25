@@ -4,8 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game of Life</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-    
+    <header>
+        <div>
+            Game of Life
+        </div>
+    </header>
+    <section>
+        <div class="board">
+            <div id="row-0"class="row">
+                <div id="r0-c0" class="column"></div>
+                <div id="r0-c1" class="column"></div>
+                <div id="r0-c2" class="column"></div>
+                <div id="r0-c3" class="column"></div>
+                <div id="r0-c4" class="column"></div>
+                <div id="r0-c5" class="column"></div>
+                <div id="r0-c6" class="column"></div>
+                <div id="r0-c7" class="column"></div>
+                <div id="r0-c8" class="column"></div>
+                <div id="r0-c9" class="column"></div>
+            </div>
+            <div id="row-1"class="row">
+                <div id="r1-c0" class="column"></div>
+                <div id="r1-c1" class="column"></div>
+                <div id="r1-c2" class="column"></div>
+                <div id="r1-c3" class="column"></div>
+                <div id="r1-c4" class="column"></div>
+                <div id="r1-c5" class="column"></div>
+                <div id="r1-c6" class="column"></div>
+                <div id="r1-c7" class="column"></div>
+                <div id="r1-c8" class="column"></div>
+                <div id="r1-c9" class="column"></div>
+            </div>
+            <div id="row-2"class="row">
+                <div id="r2-c0" class="column"></div>
+                <div id="r2-c1" class="column"></div>
+                <div id="r2-c2" class="column"></div>
+                <div id="r2-c3" class="column"></div>
+                <div id="r2-c4" class="column"></div>
+                <div id="r2-c5" class="column"></div>
+                <div id="r2-c6" class="column"></div>
+                <div id="r2-c7" class="column"></div>
+                <div id="r2-c8" class="column"></div>
+                <div id="r2-c9" class="column"></div>
+            </div>
+            <div id="row-3"class="row">
+                <div id="r3-c0" class="column"></div>
+                <div id="r3-c1" class="column"></div>
+                <div id="r3-c2" class="column"></div>
+                <div id="r3-c3" class="column"></div>
+                <div id="r3-c4" class="column"></div>
+                <div id="r3-c5" class="column"></div>
+                <div id="r3-c6" class="column"></div>
+                <div id="r3-c7" class="column"></div>
+                <div id="r3-c8" class="column"></div>
+                <div id="r3-c9" class="column"></div>
+            </div>
+            <div id="row-5"class="row">
+                <div id="r4-c0" class="column"></div>
+                <div id="r4-c1" class="column"></div>
+                <div id="r4-c2" class="column"></div>
+                <div id="r4-c3" class="column"></div>
+                <div id="r4-c4" class="column"></div>
+                <div id="r4-c5" class="column"></div>
+                <div id="r4-c6" class="column"></div>
+                <div id="r4-c7" class="column"></div>
+                <div id="r4-c8" class="column"></div>
+                <div id="r4-c9" class="column"></div>
+            </div>
+            <div id="row-5"class="row">
+                <div id="r5-c0" class="column"></div>
+                <div id="r5-c1" class="column"></div>
+                <div id="r5-c2" class="column"></div>
+                <div id="r5-c3" class="column"></div>
+                <div id="r5-c4" class="column"></div>
+                <div id="r5-c5" class="column"></div>
+                <div id="r5-c6" class="column"></div>
+                <div id="r5-c7" class="column"></div>
+                <div id="r5-c8" class="column"></div>
+                <div id="r5-c9" class="column"></div>
+            </div>
+            <div id="row-6"class="row">
+                <div id="r6-c0" class="column"></div>
+                <div id="r6-c1" class="column"></div>
+                <div id="r6-c2" class="column"></div>
+                <div id="r6-c3" class="column"></div>
+                <div id="r6-c4" class="column"></div>
+                <div id="r6-c5" class="column"></div>
+                <div id="r6-c6" class="column"></div>
+                <div id="r6-c7" class="column"></div>
+                <div id="r6-c8" class="column"></div>
+                <div id="r6-c9" class="column"></div>
+            </div>
+            <div id="row-7"class="row">
+                <div id="r7-c0" class="column"></div>
+                <div id="r7-c1" class="column"></div>
+                <div id="r7-c2" class="column"></div>
+                <div id="r7-c3" class="column"></div>
+                <div id="r7-c4" class="column"></div>
+                <div id="r7-c5" class="column"></div>
+                <div id="r7-c6" class="column"></div>
+                <div id="r7-c7" class="column"></div>
+                <div id="r7-c8" class="column"></div>
+                <div id="r7-c9" class="column"></div>
+            </div>
+            <div id="row-8"class="row">
+                <div id="r8-c0" class="column"></div>
+                <div id="r8-c1" class="column"></div>
+                <div id="r8-c2" class="column"></div>
+                <div id="r8-c3" class="column"></div>
+                <div id="r8-c4" class="column"></div>
+                <div id="r8-c5" class="column"></div>
+                <div id="r8-c6" class="column"></div>
+                <div id="r8-c7" class="column"></div>
+                <div id="r8-c8" class="column"></div>
+                <div id="r8-c9" class="column"></div>
+            </div>
+            <div id="row-9"class="row">
+                <div id="r9-c0" class="column"></div>
+                <div id="r9-c1" class="column"></div>
+                <div id="r9-c2" class="column"></div>
+                <div id="r9-c3" class="column"></div>
+                <div id="r9-c4" class="column"></div>
+                <div id="r9-c5" class="column"></div>
+                <div id="r9-c6" class="column"></div>
+                <div id="r9-c7" class="column"></div>
+                <div id="r9-c8" class="column"></div>
+                <div id="r9-c9" class="column"></div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <button id="btnPlay">Play</button>
+        <button id="btnStep">Step</button>
+        <button id="btnStop">Stop</button>
+        <button id="btnClear">Clear</button>
+    </footer>
 </body>
 </html>
