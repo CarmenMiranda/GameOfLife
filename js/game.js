@@ -91,7 +91,6 @@ Game.prototype.countNeighbours = function(positionX, positionY) {
     this.board[positionX][positionY].setNeighbours(neighbours);
 }
 
-
 /**
  * Method to iterate one time the game.
  * According to the rules if the Cell has 2 or 3 neighbours, lives, otherwise die.
@@ -112,4 +111,48 @@ Game.prototype.clearBoard = function() {
                 this.setCellDead(posicionX,posicionY);
         }
     }
+}
+
+
+/**
+ * INTERFACE
+ */
+
+//Creation and initialization of the game
+var game = new Game();
+game.initializeBoard();
+
+/**
+ * Function for selecting a cell with a position in X and Y on the board, and setting a state. 
+ * If the state of the cell is 0 (dead) is going to be set alive otherwise is going to be dead.
+ */
+function selectCell(posX, posY){
+    (game.board[posX][posY].state==0)? game.setCellAlive(posX, posY) : game.setCellDead(posX,posY);
+}
+
+/**
+ * Function that allows change the state of some cell depending on the neighbours that the cell has.
+ * First count the neighbours and then do the changes.
+ */
+function step(){
+    game.countNeighboursAll();
+    game.checkCellsStep();
+}
+
+// The variable interval, is an interval of time that do the STEP function every second.
+var interval;
+
+//Function that allows to play the game automatically
+function play(){
+    interval = setInterval(step, 500);
+}
+
+//Function that allows to stop the variable interval.
+function stop(){
+    clearInterval(interval);
+}
+
+//Function that uses the game's function called ClearBoard().
+function clearB(){
+    game.clearBoard();
 }
