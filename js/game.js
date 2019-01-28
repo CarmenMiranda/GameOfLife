@@ -93,12 +93,20 @@ Game.prototype.countNeighbours = function(positionX, positionY) {
 
 /**
  * Method to iterate one time the game.
- * According to the rules if the Cell has 2 or 3 neighbours, lives, otherwise die.
+ * According to the rules:
+ * -If the Cell is alive and has 2 or 3 neighbours, lives, otherwise die.
+ * -If the Cell is dead and has exactly 3 neighbours, born, otherwise it is still dead.
  */
 Game.prototype.checkCellsStep = function() {
     for(var posX=0; posX<10; posX++){
         for(var posY=0; posY<10; posY++){
-            (this.board[posX][posY].neighbours>1 && this.board[posX][posY].neighbours<4)? this.setCellAlive(posX, posY) : this.setCellDead(posX, posY);
+            if(this.board[posX][posY].state==1){
+                if(this.board[posX][posY].neighbours<2 || this.board[posX][posY].neighbours>3) 
+                    this.setCellDead(posX, posY);
+            }else{
+                if(this.board[posX][posY].neighbours==3)
+                    this.setCellAlive(posX, posY);
+            }
         }
     }
 }
