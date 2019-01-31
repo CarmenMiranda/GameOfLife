@@ -22,24 +22,26 @@ Cell.prototype.setNeighbours = function(neighbours) {
 
 /**
  *  ClASS GAME 
+ * We need to defined a constructor function, and also introduce de size of the board.
 */
-function Game() {
+function Game(size) {
     this.board = [];
+    this.size = size;
     this.initArray();
 }
 
 
 // Method to create the matrix for the board.
 Game.prototype.initArray = function() {
-    for ( var i = 0; i < 10; i++ ) {
+    for ( var i = 0; i < this.size; i++ ) {
         this.board[i] = []; 
     }
 }
 
 // Method to initialize the board, putting a dead CELL in each board's cell (position) 
 Game.prototype.initializeBoard = function() {
-    for (var posX = 0; posX <10; posX++){
-        for(var posY = 0; posY < 10; posY++){
+    for (var posX = 0; posX <this.size; posX++){
+        for(var posY = 0; posY < this.size; posY++){
             this.board[posX][posY] = new Cell(posX, posY);
         }
     }
@@ -67,8 +69,8 @@ Game.prototype.setCellDead = function(positionX, positionY) {
 
 // Method to count and set the neighbours for All the CELLS in the board
 Game.prototype.countNeighboursAll = function() {
-    for(var positionX=0; positionX<10;positionX++){
-        for(var positionY=0; positionY<10;positionY++){
+    for(var positionX=0; positionX<this.size;positionX++){
+        for(var positionY=0; positionY<this.size;positionY++){
             this.countNeighbours(positionX,positionY);
         }
     }
@@ -78,9 +80,9 @@ Game.prototype.countNeighboursAll = function() {
 Game.prototype.countNeighbours = function(positionX, positionY) {
     var neighbours=0;
     for(var posX = positionX-1; posX < positionX+2; posX++){
-        if(posX>= 0 && posX<10){
+        if(posX>= 0 && posX<this.size){
             for(var posY = positionY-1; posY< positionY+2; posY++){
-                if(posY>=0 && posY<10){
+                if(posY>=0 && posY<this.size){
                     neighbours+=this.board[posX][posY].state;
                 }
             }
@@ -98,8 +100,8 @@ Game.prototype.countNeighbours = function(positionX, positionY) {
  * -If the Cell is dead and has exactly 3 neighbours, born, otherwise it is still dead.
  */
 Game.prototype.checkCellsStep = function() {
-    for(var posX=0; posX<10; posX++){
-        for(var posY=0; posY<10; posY++){
+    for(var posX=0; posX<this.size; posX++){
+        for(var posY=0; posY<this.size; posY++){
             if(this.board[posX][posY].state==1){
                 if(this.board[posX][posY].neighbours<2 || this.board[posX][posY].neighbours>3) 
                     this.setCellDead(posX, posY);
@@ -113,8 +115,8 @@ Game.prototype.checkCellsStep = function() {
 
 // Method to clear the board. Set all the cell that are alive, dead.
 Game.prototype.clearBoard = function() {
-    for (var posicionX = 0; posicionX <10; posicionX++){
-        for(var posicionY = 0; posicionY < 10; posicionY++){
+    for (var posicionX = 0; posicionX <this.size; posicionX++){
+        for(var posicionY = 0; posicionY < this.size; posicionY++){
             if(this.board[posicionX][posicionY].state==1)
                 this.setCellDead(posicionX,posicionY);
         }
@@ -126,9 +128,40 @@ Game.prototype.clearBoard = function() {
  * INTERFACE
  */
 
+var game;
+
 //Creation and initialization of the game
-var game = new Game();
-game.initializeBoard();
+function drawBoard(){
+    var size = document.getElementById("sizeBoard").value;
+    game = new Game(size);
+    game.initializeBoard();
+    drawingBoard(size);
+}
+
+// Function to draw the board, appending the rows and columns required
+function drawingBoard(size){
+    for(var posX=0; posX<size;posX++){
+        var idRow="row-"+posX;
+        //Creates the element row
+        var row= document.createElement("div");
+        row.setAttribute("id",idRow);
+        row.setAttribute("class","row");
+        document.getElementById("board").appendChild(row);
+        for(var posY=0; posY<size; posY++){
+            var idColumn="r"+posX+"-c"+posY;
+            //Creates the element column
+            var column= document.createElement("div");
+            column.setAttribute("id",idColumn);
+            column.setAttribute("class","column");
+            var functionSelect="selectCell("+posX+", "+posY+")";
+            column.setAttribute("onclick",functionSelect);
+            document.getElementById(idRow).appendChild(column);
+        }
+    }
+    document.getElementById("startGame").classList.add("hide");
+    document.getElementById("board").classList.remove("hide");
+    document.getElementsByTagName("footer")[0].classList.remove("hide");
+}
 
 /**
  * Function for selecting a cell with a position in X and Y on the board, and setting a state. 
@@ -163,4 +196,16 @@ function stop(){
 //Function that uses the game's function called ClearBoard().
 function clearB(){
     game.clearBoard();
+}
+
+//Function that removes the current board, and allows to visualize the controls to change the size of the board
+function selectSize(){
+    stop;
+    var board = document.getElementById("board");
+    while (board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
+    document.getElementById("startGame").classList.remove("hide");
+    board.classList.add("hide");
+    document.getElementsByTagName("footer")[0].classList.add("hide");
 }
